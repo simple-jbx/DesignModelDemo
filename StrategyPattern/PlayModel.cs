@@ -8,6 +8,7 @@ namespace DesignModelDemo
 {
     abstract class PlayModel
     {
+        protected int[] randomList;
         public virtual int getCurrIndex(SongInfo currPlaySong, List<SongInfo> currPlaySongList)
         {
             if (currPlaySong == null || currPlaySongList == null || currPlaySongList.Count == 0)
@@ -29,44 +30,44 @@ namespace DesignModelDemo
             return currIndex;
         }
 
-        public abstract int getPreIndex(int currIndex, int listCount, int[] randomList);
-        public abstract int getNextIndex(int currIndex, int listCount, int[] randomList);
+        public abstract int getPreIndex(int currIndex, int listCount);
+        public abstract int getNextIndex(int currIndex, int listCount);
     }
 
     class SingleCycle : PlayModel
     {
-        public override int getNextIndex(int currIndex, int listCount, int[] randomList)
+        public override int getNextIndex(int currIndex, int listCount)
         {
             return currIndex;
         }
 
-        public override int getPreIndex(int currIndex, int listCount, int[] randomList)
+        public override int getPreIndex(int currIndex, int listCount)
         {
             return currIndex;
         }
     }
 
-    class listCycle : PlayModel
+    class ListCycle : PlayModel
     {
-        public override int getNextIndex(int currIndex, int listCount, int[] randomList)
+        public override int getNextIndex(int currIndex, int listCount)
         {
             return (currIndex + 1) % listCount;
         }
 
-        public override int getPreIndex(int currIndex, int listCount, int[] randomList)
+        public override int getPreIndex(int currIndex, int listCount)
         {
             return (currIndex - 1 + listCount) % listCount;
         }
     }
 
-    class randomCycle : PlayModel
+    class RandomCycle : PlayModel
     {
-        public randomCycle(int[] randomList, int listCount)
+        public RandomCycle(int listCount)
         {
-            buildRandomList(randomList, listCount);
+            buildRandomList(listCount);
         }
 
-        public override int getNextIndex(int currIndex, int listCount, int[] randomList)
+        public override int getNextIndex(int currIndex, int listCount)
         {
             int rCount = randomList.Count();
             int nextIndex = 0;
@@ -76,7 +77,7 @@ namespace DesignModelDemo
                 {
                     if (i == rCount - 1)
                     {
-                        buildRandomList(randomList, listCount);
+                        startNewRound(listCount);
                         nextIndex = 0;
                     }
                     else
@@ -89,7 +90,7 @@ namespace DesignModelDemo
             return nextIndex;
         }
 
-        public override int getPreIndex(int currIndex, int listCount, int[] randomList)
+        public override int getPreIndex(int currIndex, int listCount)
         {
             int rCount = randomList.Count();
             int preIndex = 0;
@@ -99,7 +100,7 @@ namespace DesignModelDemo
                 {
                     if (i == rCount - 1)
                     {
-                        //startNewRound();
+                        startNewRound(listCount);
                         preIndex = randomList[0];
                     }
                     else
@@ -112,7 +113,7 @@ namespace DesignModelDemo
             return preIndex;
         }
 
-        private void buildRandomList(int[] randomList, int listCount)
+        private void buildRandomList(int listCount)
         {
             randomList = new int[listCount];
 
@@ -137,6 +138,11 @@ namespace DesignModelDemo
             arr[a] = arr[b];
             arr[b] = temp;
         }
+
+        private void startNewRound(int listCount)
+        {
+            buildRandomList(listCount);
+        }
     }
 
     class ContextPlayModel
@@ -152,15 +158,15 @@ namespace DesignModelDemo
             return currPlayModel.getCurrIndex(currPlaySong, currPlaySongList);
         }
 
-        public int getPreIndex(int currIndex, int listCount, int[] randomList)
+        public int getPreIndex(int currIndex, int listCount)
         {
-            return currPlayModel.getPreIndex(currIndex, listCount, randomList);
+            return currPlayModel.getPreIndex(currIndex, listCount);
 
         }
 
-        public int getNextIndex(int currIndex, int listCount, int[] randomList)
+        public int getNextIndex(int currIndex, int listCount)
         {
-            return currPlayModel.getNextIndex(currIndex, listCount, randomList);
+            return currPlayModel.getNextIndex(currIndex, listCount);
         }
     }
 }
