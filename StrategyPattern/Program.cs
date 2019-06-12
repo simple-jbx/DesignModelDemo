@@ -14,9 +14,13 @@ namespace DesignModelDemo
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new StrategyPattern());
+
+            ContextPlayModel contextPlayModel;
+            contextPlayModel = new ContextPlayModel(new SingleCycle());
+            
         }
     }
 }

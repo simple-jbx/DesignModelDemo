@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace DesignModelDemo
 {
-    public partial class Form1 : Form
+    public partial class StrategyPattern : Form
     {
-        public Form1()
+        public StrategyPattern()
         {
             InitializeComponent();
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = !panel3.Visible;
         }
     }
 }
