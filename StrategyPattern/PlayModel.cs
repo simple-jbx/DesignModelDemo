@@ -20,7 +20,7 @@ namespace DesignModelDemo
             try
             {
                 currIndex = currPlaySongList.FindIndex((SongInfo song) =>
-                { return currPlaySong.FilePath.Equals(song.FilePath); });
+                { return currPlaySong.Id.Equals(song.Id); });
 
             }
             catch (Exception)
@@ -71,22 +71,30 @@ namespace DesignModelDemo
         {
             int rCount = randomList.Count();
             int nextIndex = 0;
-            for (int i = 0; i < rCount; i++)
+            if(rCount != listCount)
             {
-                if (randomList[i] == currIndex)
-                {
-                    if (i == rCount - 1)
-                    {
-                        startNewRound(listCount);
-                        nextIndex = 0;
-                    }
-                    else
-                    {
-                        nextIndex = randomList[i + 1];
-                    }
-                    break;
-                }
+                buildRandomList(listCount);
+                return randomList[0];
             }
+            else
+            {
+                for (int i = 0; i < rCount; i++)
+                {
+                    if (randomList[i] == currIndex)
+                    {
+                        if (i == rCount - 1)
+                        {
+                            startNewRound(rCount);
+                            nextIndex = randomList[0];
+                        }
+                        else
+                        {
+                            nextIndex = randomList[i + 1];
+                        }
+                        break;
+                    }
+                }
+            }        
             return nextIndex;
         }
 
@@ -94,22 +102,30 @@ namespace DesignModelDemo
         {
             int rCount = randomList.Count();
             int preIndex = 0;
-            for (int i = 0; i < rCount; i++)
+            if (rCount != listCount)
             {
-                if (randomList[i] == currIndex)
-                {
-                    if (i == rCount - 1)
-                    {
-                        startNewRound(listCount);
-                        preIndex = randomList[0];
-                    }
-                    else
-                    {
-                        preIndex = randomList[i + 1];
-                    }
-                    break;
-                }
+                buildRandomList(listCount);
+                return randomList[0];
             }
+            else
+            {
+                for (int i = 0; i < rCount; i++)
+                {
+                    if (randomList[i] == currIndex)
+                    {
+                        if (i == 0)
+                        {
+                            startNewRound(listCount);
+                            preIndex = randomList[listCount - 1];
+                        }
+                        else
+                        {
+                            preIndex = randomList[i - 1];
+                        }
+                        break;
+                    }
+                }
+            } 
             return preIndex;
         }
 
@@ -151,6 +167,7 @@ namespace DesignModelDemo
         public ContextPlayModel(PlayModel currPlayModel)
         {
             this.currPlayModel = currPlayModel;
+            Console.WriteLine("当前播放模式为：{0}", currPlayModel.ToString());
         }
 
         public int getCurrIndex(SongInfo currPlaySong, List<SongInfo> currPlaySongList)
