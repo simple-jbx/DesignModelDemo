@@ -163,7 +163,7 @@ namespace DesignModelDemo
 
     class ContextPlayModel
     {
-        PlayModel currPlayModel;
+        private PlayModel currPlayModel;
         public ContextPlayModel(PlayModel currPlayModel)
         {
             this.currPlayModel = currPlayModel;
