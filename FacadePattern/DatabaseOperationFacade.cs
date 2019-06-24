@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace FacadePattern
 {
-    class DatabaseOperationFacade
+    /// <summary>
+    /// 数据库操作外观类，知道哪些子系统类负责处理请求，将客户的请求代理给适当的子系统对象
+    /// </summary>
+    public class DatabaseOperationFacade
     {
         QueryForDictionary queryForDictionary;
         QueryForList queryForList;
@@ -23,12 +26,18 @@ namespace FacadePattern
             update = new Update();
         }
 
-        public User queryForUser(string userName)
+        /// <summary>
+        /// 根据userName查询对应用户信息
+        /// </summary>
+        /// <param name="userAccount"></param>
+        /// <returns>返回User对象</returns>
+        public User queryForUser(string userAccount)
         {
             const string cmdText = "select * from user where user_account = @user_account";
             OleDbParameter[] parameters = {
-                new OleDbParameter("@user_account", userName)
+                new OleDbParameter("@user_account", userAccount)
             };
+
             Dictionary<string, object> dic = queryForDictionary.queryForDictionary(cmdText, parameters);
             if (dic == null)
             {
@@ -40,6 +49,11 @@ namespace FacadePattern
                 (int)dic["is_delete"]);
         }
 
+        /// <summary>
+        /// 查询歌曲列表信息
+        /// </summary>
+        /// <param name="tName"></param>
+        /// <returns>返回对应歌曲列表</returns>
         public List<SongInfo> queryForSongOfList(string tName)
         {
             const string cmdText = "select * from all_local_song inner join @tName on " +
@@ -58,6 +72,10 @@ namespace FacadePattern
             return songs;
         }
 
+        /// <summary>
+        /// 根据传入的User对象在数据库中插入一条用户信息
+        /// </summary>
+        /// <param name="user"></param>
         public void createUserByObject(User user)
         {
             const string cmdText = "insert into user(pk_user_id, user_account, user_nickname, user_password, user_img," +
@@ -81,13 +99,13 @@ namespace FacadePattern
         /// </summary>
         /// <param name="tName"></param>
         /// <returns>返回数据受影响的行数</returns>
-        public int createCollectTableByTableName(string tName)
+        public void createCollectTableByTableName(string tName)
         {
             const string cmdText = "create table @tName ([pk_song_id] text(33) primary key, [is_delete] int)";
             OleDbParameter[] parameters = {
                 new OleDbParameter("@tName", tName)
             };
-            return update.update(cmdText, parameters);
+            update.update(cmdText, parameters);
         }
 
         /// <summary>
@@ -96,7 +114,7 @@ namespace FacadePattern
         /// <param name="song"></param>
         /// <param name="tName"></param>
         /// <returns>返回受影响的行数</returns>
-        public int insertSongByObjectAndTableName(SongInfo song, string tName)
+        public void insertSongByObjectAndTableName(SongInfo song, string tName)
         {
             const string cmdText0 = "insert into all_local_song(pk_song_id, song_file_path, " +
                 "lyric_path, is_delete) values (@pk_song_id, @song_file_path, @lyric_path, @isdelete)";
@@ -121,7 +139,7 @@ namespace FacadePattern
             {
                 update.update(cmdText0, parameters0);
             }
-            return update.update(cmdText1, parameters1);
+            update.update(cmdText1, parameters1);
         }
 
         /// <summary>
@@ -171,6 +189,11 @@ namespace FacadePattern
             }
         }
 
+        /// <summary>
+        /// 根据id以及表名将对应数据的is_delete位置为1（逻辑删除）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tName"></param>
         public void removeSongByIdAndTableName(string id, string tName)
         {
             const string cmdText = "update @tName set is_delete = @is_delete where pk_song_id = @pk_song_id";
@@ -188,6 +211,11 @@ namespace FacadePattern
             }
         }
 
+        /// <summary>
+        /// 根据id以及表名称将歌曲信息从数据库中移除（物理删除）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tName"></param>
         public void deleteSongByIdAndTableName(string id, string tName)
         {
             const string cmdText = "delete form @tName where pk_song_id = @pk_song_id";
@@ -204,6 +232,10 @@ namespace FacadePattern
             }
         }
 
+        /// <summary>
+        /// 根据传入SongInfo对象跟新歌曲信息（这里设计只能更新歌词地址）
+        /// </summary>
+        /// <param name="song"></param>
         public void updateSongInfoByObject(SongInfo song)
         {
             const string cmdText = "update all_local_song set lyric_path = @lyric_path where pk_song_id = @pk_song_id";
@@ -213,8 +245,68 @@ namespace FacadePattern
             };
             update.update(cmdText, parameters);
         }
+
+        /// <summary>
+        /// 根据传入对象更改数据库中对应用户信息（只能更改user_nickname、user_img）
+        /// </summary>
+        /// <param name="user"></param>
+        public void updateUserInfoByObject(User user)
+        {
+            const string cmdText = "update user set user_nickname = @user_nickname, user_img = @user_img where " +
+                "user_id = @user_id";
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@user_nickname", user.Nickname),
+                    new OleDbParameter("@user_img", user.Img),
+                    new OleDbParameter("@user_id", user.Id)
+            };
+            update.update(cmdText, parameters);
+        }
+
+        /// <summary>
+        /// 根据传入对象更改用户密码
+        /// </summary>
+        /// <param name="user"></param>
+        public void changeUserPasswordByObject(User user)
+        {
+            const string cmdText = "update user set user_password = @user_password where user_id = @user_id";
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@user_password", user.Password),
+                    new OleDbParameter("@user_id", user.Id)
+            };
+            update.update(cmdText, parameters);
+        }
+
+        /// <summary>
+        /// 从数据库中移除用户（逻辑删除）
+        /// </summary>
+        /// <param name="user"></param>
+        public void removeUserById(string userId)
+        {
+            const string cmdText = "update user set is_delete = @is_delete where user_id = @user_id";
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@is_delete", 1),
+                    new OleDbParameter("@user_id", userId)
+            };
+            update.update(cmdText, parameters);
+        }
+
+        /// <summary>
+        /// 从数据库中删除用户（物理删除）
+        /// </summary>
+        /// <param name="userId"></param>
+        public void deleteUserById(string userId)
+        {
+            const string cmdText = "delete form user where user_id = @user_id";
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@user_id", userId)
+            };
+            update.update(cmdText, parameters);
+        }
     }
 
+    /// <summary>
+    /// 查询结果返回Dictonary类
+    /// </summary>
     class QueryForDictionary : Sqlhelper
     {
         public Dictionary<string, object> queryForDictionary(string cmdText, params OleDbParameter[] parameters)
@@ -237,6 +329,9 @@ namespace FacadePattern
         }
     }
 
+    /// <summary>
+    /// 查询结果返回List类
+    /// </summary>
     class QueryForList : Sqlhelper
     {
         public List<Dictionary<string, object> > queryForList(string cmdText, params OleDbParameter[] parameters)
@@ -258,6 +353,9 @@ namespace FacadePattern
         }
     }
 
+    /// <summary>
+    /// 更新类
+    /// </summary>
     class Update : Sqlhelper
     {
         public int update(string cmdText, params OleDbParameter[] parameters)

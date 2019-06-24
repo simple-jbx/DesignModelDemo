@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FacadePattern
 {
-    class User
+    public class User
     {
         private string id;
         private string account;
