@@ -33,12 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.Shell32">
-      <HintPath>..\..\C#Project\X-Player\X-Player\obj\Debug\AxInterop.Shell32.dll</HintPath>
+    <Reference Include="AxInterop.Shell32, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AxInterop.Shell32.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Interop.Shell32">
-      <HintPath>..\..\C#Project\X-Player\X-Player\obj\Debug\Interop.Shell32.dll</HintPath>
+    <Reference Include="Interop.Shell32, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.Shell32.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>

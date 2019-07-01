@@ -8,24 +8,21 @@ namespace SingletonPattern
         public Form1()
         {
             InitializeComponent();
-            //toolStrip1.Click += tStripLabel1_Click;
-            //toolStrip1.Click += tStripLabel2_Click;
-            toolStrip1.Click += tStripLabel3_Click;
         }
 
-        private void tStripLabel1_Click(object sender, EventArgs e)
+        private void toolStripLabel1_Click(object sender, EventArgs e)
         {
             Tool1 tool1 = new Tool1();
+            tool1.MdiParent = this;
             tool1.Show();
-            //tool1.ShowDialog();
         }
 
-        private void tStripLabel2_Click(object sender, EventArgs e)
+        private void toolStripLabel2_Click(object sender, EventArgs e)
         {
             Tool2.GetInstance().Show();
         }
 
-        private void tStripLabel3_Click(object sender, EventArgs e)
+        private void toolStripLabel3_Click(object sender, EventArgs e)
         {
             Tool3.GetInstance().Show();
         }

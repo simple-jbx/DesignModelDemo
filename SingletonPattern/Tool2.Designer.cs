@@ -60,6 +60,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Tool2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Tool2";
             this.ResumeLayout(false);
 

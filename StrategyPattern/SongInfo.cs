@@ -115,8 +115,6 @@ namespace DesignModelDemo
             catch (Exception)
             {
             }
-
-
         }
 
         private void setAlbumArt(string strPath)

@@ -12,9 +12,46 @@ namespace DecoratorPattern
 {
     public partial class Form1 : Form
     {
+        Pancake pancake = new Pancake();
+        Egg egg = new Egg();
+        Vegetable vegetable = new Vegetable();
+        MeatFloss meatFloss = new MeatFloss();
+        Sausage sausage = new Sausage();
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            vegetable.Decorate(pancake);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            egg.Decorate(pancake);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            sausage.Decorate(pancake);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            meatFloss.Decorate(pancake);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            label1.Text = pancake.showInfo();
+            label2.Text = pancake.showPrice();
+            pancake = new Pancake();
+            egg = new Egg();
+            meatFloss = new MeatFloss();
+            sausage = new Sausage();
+            vegetable = new Vegetable();
         }
     }
 }

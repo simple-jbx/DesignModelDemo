@@ -167,7 +167,6 @@ namespace DesignModelDemo
         public ContextPlayModel(PlayModel currPlayModel)
         {
             this.currPlayModel = currPlayModel;
-            Console.WriteLine("当前播放模式为：{0}", currPlayModel.ToString());
         }
 
         public int getCurrIndex(SongInfo currPlaySong, List<SongInfo> currPlaySongList)

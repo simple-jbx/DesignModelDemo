@@ -50,7 +50,7 @@
             this.button2.Text = "工具二";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // Tool2
+            // Tool3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -59,8 +59,9 @@
             this.Controls.Add(this.button1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Tool2";
-            this.Text = "Tool2";
+            this.Name = "Tool3";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Tool3";
             this.ResumeLayout(false);
 
         }
