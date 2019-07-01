@@ -48,10 +48,6 @@ namespace DecoratorPattern
             label1.Text = pancake.showInfo();
             label2.Text = pancake.showPrice();
             pancake = new Pancake();
-            egg = new Egg();
-            meatFloss = new MeatFloss();
-            sausage = new Sausage();
-            vegetable = new Vegetable();
         }
     }
 }
