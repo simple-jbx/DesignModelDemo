@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SingletonPattern
+namespace MementoPattern
 {
     static class Program
     {
@@ -17,9 +17,6 @@ namespace SingletonPattern
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            SpecialSingleton special = new SpecialSingleton("YY");
-            SpecialSingleton.instance.show();
         }
     }
 }
