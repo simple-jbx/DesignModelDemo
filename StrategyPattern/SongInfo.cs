@@ -9,7 +9,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace DesignModelDemo
+namespace DesignPatternDemo
 {
 
     /// <summary>

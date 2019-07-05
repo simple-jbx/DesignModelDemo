@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace DesignModelDemo
+namespace DesignPatternDemo
 {
     abstract class PlayModel
     {
@@ -36,6 +36,9 @@ namespace DesignModelDemo
 
     class SingleCycle : PlayModel
     {
+        public SingleCycle(int listCount = 0)
+        { }
+
         public override int getNextIndex(int currIndex, int listCount)
         {
             return currIndex;
@@ -49,6 +52,9 @@ namespace DesignModelDemo
 
     class ListCycle : PlayModel
     {
+        public ListCycle(int listCount = 0)
+        { }
+
         public override int getNextIndex(int currIndex, int listCount)
         {
             return (currIndex + 1) % listCount;

@@ -1,6 +1,6 @@
-﻿namespace DesignModelDemo
+﻿namespace DesignPatternDemo
 {
-    partial class StrategyPattern
+    partial class StrategyPatternV1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,21 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StrategyPattern));
-            this.panel3 = new DesignModelDemo.UCPanel();
-            this.panel5 = new DesignModelDemo.UCPanel();
-            this.panel4 = new DesignModelDemo.UCPanel();
-            this.panel6 = new DesignModelDemo.UCPanel();
-            this.panel1 = new DesignModelDemo.UCPanel();
-            this.ucPanel2 = new DesignModelDemo.UCPanel();
-            this.ucPanel3 = new DesignModelDemo.UCPanel();
-            this.ucPanel1 = new DesignModelDemo.UCPanel();
-            this.panel2 = new DesignModelDemo.UCPanel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StrategyPatternV1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new DesignPatternDemo.UCPanel();
+            this.panel5 = new DesignPatternDemo.UCPanel();
+            this.panel4 = new DesignPatternDemo.UCPanel();
+            this.panel6 = new DesignPatternDemo.UCPanel();
+            this.panel1 = new DesignPatternDemo.UCPanel();
+            this.ucPanel2 = new DesignPatternDemo.UCPanel();
+            this.ucPanel3 = new DesignPatternDemo.UCPanel();
+            this.ucPanel1 = new DesignPatternDemo.UCPanel();
+            this.panel2 = new DesignPatternDemo.UCPanel();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(0, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(799, 23);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(1, 121);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(799, 26);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "label2";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
@@ -134,27 +154,7 @@
             this.panel2.TabIndex = 0;
             this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(0, 75);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(799, 23);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(1, 121);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(799, 26);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // StrategyPattern
+            // StrategyPatternV1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -164,8 +164,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Name = "StrategyPattern";
-            this.Text = "strategy";
+            this.Name = "StrategyPatternV1";
+            this.Text = "strategyV1";
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

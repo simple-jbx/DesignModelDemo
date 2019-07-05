@@ -4,19 +4,20 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DesignModelDemo
+namespace DesignPatternDemo
 {
-    public partial class StrategyPattern : Form
+    public partial class StrategyPatternV1 : Form
     {
         List<SongInfo> currPlaySongList = new List<SongInfo>();
         ContextPlayModel contextPlayModel;
         SongInfo currPlaySong;
 
-        public StrategyPattern()
+        public StrategyPatternV1()
         {
             InitializeComponent();
             SongInfo song0 = new SongInfo(Application.StartupPath + "\\music\\虎二 - 一个人决定.mp3");
@@ -45,7 +46,10 @@ namespace DesignModelDemo
         private void panel6_MouseClick(object sender, MouseEventArgs e)
         {
             UCPanel uCPanel = (UCPanel)sender;
-            switch(uCPanel.Name) 
+            //Type classType = Type.GetType("DesignPatternDemo.RandomCycle");
+            //object[] constructParms = new object[] { currPlaySongList.Count };
+            //contextPlayModel = new ContextPlayModel((PlayModel)Activator.CreateInstance(classType, constructParms));
+            switch (uCPanel.Name) 
             {
                 case "panel4" :
                     contextPlayModel = new ContextPlayModel(new RandomCycle(currPlaySongList.Count));
