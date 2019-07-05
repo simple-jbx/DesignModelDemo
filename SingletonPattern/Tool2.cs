@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SingletonPattern
 {
-    public partial class Tool2 : Form
+    public sealed partial class Tool2 : Form
     {
         private static Tool2 instance;
         private static readonly object syncRoot = new object();
