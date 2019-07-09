@@ -21,17 +21,13 @@ namespace DesignPatternDemo
         {
             InitializeComponent();
             SongInfo song0 = new SongInfo(Application.StartupPath + "\\music\\虎二 - 一个人决定.mp3");
-            SongInfo song1 = new SongInfo(Application.StartupPath + "\\music\\王力宏 _ 谭维维 - 缘分一道桥.flac");
-            SongInfo song2 = new SongInfo(Application.StartupPath + "\\music\\娜美 - 一梦半生.mp3");
-            SongInfo song3 = new SongInfo(Application.StartupPath + "\\music\\海来阿木 _ 阿呷拉古 _ 曲比阿且 - 别知己.mp3");
-            SongInfo song4 = new SongInfo(Application.StartupPath + "\\music\\娜美 - 一梦半生.mp3");
-            SongInfo song5 = new SongInfo(Application.StartupPath + "\\music\\陆虎 - 雪落下的声音.mp3");
+            SongInfo song1 = new SongInfo(Application.StartupPath + "\\music\\娜美 - 一梦半生.mp3");
+            SongInfo song2 = new SongInfo(Application.StartupPath + "\\music\\海来阿木 _ 阿呷拉古 _ 曲比阿且 - 别知己.mp3");
+            SongInfo song3 = new SongInfo(Application.StartupPath + "\\music\\陆虎 - 雪落下的声音.mp3");
             currPlaySongList.Add(song0);
             currPlaySongList.Add(song1);
             currPlaySongList.Add(song2);
             currPlaySongList.Add(song3);
-            currPlaySongList.Add(song4);
-            currPlaySongList.Add(song5);
             currPlaySong = song0;
             contextPlayModel = new ContextPlayModel(new ListCycle());
             label1.Text = "当前播放歌曲为 "  + contextPlayModel.getCurrIndex(currPlaySong,currPlaySongList) + " " + currPlaySong.OriginName;
